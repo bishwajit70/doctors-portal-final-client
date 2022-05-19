@@ -14,10 +14,6 @@ const Login = () => {
 
     const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
 
-
-
-
-
     const [
         signInWithEmailAndPassword,
         user,
