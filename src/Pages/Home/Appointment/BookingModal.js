@@ -4,7 +4,7 @@ import auth from '../../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 
-const BookingModal = ({ treatment, date, setTreatment }) => {
+const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
     const { _id, name, slots } = treatment;
 
     const [user, loading, error] = useAuthState(auth);
@@ -40,8 +40,9 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
                     toast.success(`Appointment is set on ${formattedDate} at ${slot}`)
                 } else {
                     toast.error(`Already have an appointment on ${data.booking?.date} at ${data.booking?.slot}`)
+        
                 }
-
+                refetch()
                 setTreatment(null)
             })
 
@@ -49,8 +50,6 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
     }
     return (
         <div>
-
-
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
