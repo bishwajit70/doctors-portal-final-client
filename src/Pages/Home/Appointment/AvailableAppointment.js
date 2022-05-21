@@ -11,7 +11,7 @@ const AvailableAppointment = ({ date }) => {
     const formattedDate = format(date, 'PP');
 
 
-    const { data: services, isLoading, refetch } = useQuery(['available', formattedDate], () => fetch(`http://localhost:5000/available?date=${formattedDate}`).then(res =>
+    const { data: services, isLoading, refetch } = useQuery(['available', formattedDate], () => fetch(`https://fast-meadow-06215.herokuapp.com/available?date=${formattedDate}`).then(res =>
         res.json()))
 
     if (isLoading) {
@@ -27,16 +27,16 @@ const AvailableAppointment = ({ date }) => {
                         key={service._id}
                         service={service}
                         setTreatment={setTreatment}
-                        
+
 
                     ></Service>)
                 }
             </div>
-            {treatment && <BookingModal 
-            date={date} 
-            treatment={treatment} 
-            setTreatment={setTreatment}
-            refetch={refetch}
+            {treatment && <BookingModal
+                date={date}
+                treatment={treatment}
+                setTreatment={setTreatment}
+                refetch={refetch}
             ></BookingModal>}
         </div>
     );

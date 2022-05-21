@@ -24,7 +24,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
             patientName: user.displayName,
             phone: event.target.phone.value
         }
-        fetch('http://localhost:5000/booking', {
+        fetch('https://fast-meadow-06215.herokuapp.com/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -40,7 +40,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
                     toast.success(`Appointment is set on ${formattedDate} at ${slot}`)
                 } else {
                     toast.error(`Already have an appointment on ${data.booking?.date} at ${data.booking?.slot}`)
-        
+
                 }
                 refetch()
                 setTreatment(null)

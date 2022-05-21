@@ -1,43 +1,41 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading';
-import UserRow from './UserRow';
+import DoctorRow from './DoctorRow';
 
-const Users = () => {
-    const { data: users, isLoading, refetch } = useQuery('users', () => fetch('https://fast-meadow-06215.herokuapp.com/user', {
-        method: 'GET',
+const ManageDoctors = () => {
+    const { data: doctors, isLoading, refetch } = useQuery('doctors', () => fetch('http://localhost:5000/doctor', {
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     }).then(res => res.json()))
-
     if (isLoading) {
         return <Loading></Loading>
     }
     return (
         <div>
-            <h2 className="text-2xl">All Users: {users.length}</h2>
+            <h2 className="text-2xl">Manage Doctors: {doctors.length}</h2>
             <div class="overflow-x-auto">
                 <table class="table w-full">
+
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Avatar</th>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Specialty</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            users.map((user, index) => <UserRow
-                                key={user._id}
-                                user={user}
+                            doctors.map((doctor, index) => <DoctorRow
+                                key={doctor._id}
+                                doctor={doctor}
                                 index={index}
                                 refetch={refetch}
-                            ></UserRow>)
+                            ></DoctorRow>)
                         }
-
-
                     </tbody>
                 </table>
             </div>
@@ -45,4 +43,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default ManageDoctors;
